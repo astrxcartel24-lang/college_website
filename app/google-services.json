@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "841192605372",
+    "project_id": "plott-a596a",
+    "storage_bucket": "plott-a596a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:841192605372:android:e2522b5c2a95d0343a32b9",
+        "android_client_info": {
+          "package_name": "com.example.car_parking"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0KD_Mdxds2xE6JayoUtXbSF1CNTFtL6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
