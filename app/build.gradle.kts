@@ -62,6 +62,8 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.firebase.crashlytics.buildtools)
 
     // ── Testing ────────────────────────────────────────────────────────────
     testImplementation(libs.junit)
