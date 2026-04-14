@@ -33,7 +33,7 @@ android {
     }
     kotlin {
         compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11) // ← correct KTS syntax
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
         }
     }
     buildFeatures {
@@ -64,6 +64,9 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.firebase.crashlytics.buildtools)
+    implementation(libs.firebase.firestore)
+    implementation("com.google.firebase:firebase-storage-ktx")
+    implementation(libs.firebase.firestore.ktx)
 
     // ── Testing ────────────────────────────────────────────────────────────
     testImplementation(libs.junit)
@@ -73,4 +76,8 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation("androidx.exifinterface:exifinterface:1.3.7")
 }

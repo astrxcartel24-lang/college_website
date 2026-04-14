@@ -28,14 +28,24 @@ class AuthViewModel : ViewModel() {
     private val _authState = MutableStateFlow<AuthState>(AuthState.Idle)
     val authState: StateFlow<AuthState> = _authState.asStateFlow()
 
-    fun signup(username: String, email: String, password: String, confirmPassword: String) {
+    fun signup(
+        username: String,
+        email: String,
+        phoneNumber: String,
+        password: String,
+        confirmPassword: String
+    ) {
         when {
-            username.isBlank() || email.isBlank() || password.isBlank() || confirmPassword.isBlank() ->
-            { _authState.value = AuthState.Error("Please fill all the fields"); return }
-            password.length < 8 ->
-            { _authState.value = AuthState.Error("Password must be at least 8 characters"); return }
-            password != confirmPassword ->
-            { _authState.value = AuthState.Error("Passwords do not match"); return }
+            username.isBlank() || email.isBlank() || password.isBlank()
+                    || confirmPassword.isBlank() || phoneNumber.isBlank() -> {
+                _authState.value = AuthState.Error("Please fill all the fields"); return
+            }
+            password.length < 8 -> {
+                _authState.value = AuthState.Error("Password must be at least 8 characters"); return
+            }
+            password != confirmPassword -> {
+                _authState.value = AuthState.Error("Passwords do not match"); return
+            }
         }
 
         _authState.value = AuthState.Loading
@@ -44,7 +54,12 @@ class AuthViewModel : ViewModel() {
             try {
                 val result = auth.createUserWithEmailAndPassword(email, password).await()
                 val userId = result.user?.uid ?: throw Exception("User ID not found")
-                val user = UserModel(username = username, email = email, userId = userId)
+                val user = UserModel(
+                    username    = username,
+                    email       = email,
+                    userId      = userId,
+                    phoneNumber = phoneNumber
+                )
                 dbRef.child(userId).setValue(user).await()
                 _authState.value = AuthState.Success(ROUTE_LOGIN)
             } catch (e: Exception) {
@@ -54,9 +69,8 @@ class AuthViewModel : ViewModel() {
     }
 
     fun login(email: String, password: String) {
-        when {
-            email.isBlank() || password.isBlank() ->
-            { _authState.value = AuthState.Error("Email and Password required"); return }
+        if (email.isBlank() || password.isBlank()) {
+            _authState.value = AuthState.Error("Email and Password required"); return
         }
 
         _authState.value = AuthState.Loading

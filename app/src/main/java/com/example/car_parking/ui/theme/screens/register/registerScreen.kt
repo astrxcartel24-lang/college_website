@@ -35,8 +35,9 @@ import com.example.car_parking.navigation.ROUTE_LOGIN
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.ui.autofill.AutofillType
 
-// ── Color tokens ──────────────────────────────────────────────────────────────
+
 val OffWhite        = Color(0xFFF8F8F8)
 val SurfaceWhite    = Color(0xFFFFFFFF)
 val Black           = Color(0xFF111111)
@@ -57,10 +58,11 @@ fun RegisterScreen(
     var confirmPass        by remember { mutableStateOf("") }
     var passwordVisible    by remember { mutableStateOf(false) }
     var confirmPassVisible by remember { mutableStateOf(false) }
+    var phoneNumber by remember { mutableStateOf("") }
 
     val authState by viewModel.authState.collectAsStateWithLifecycle()
 
-    // ── Navigate on success — no resetState() ─────────────────────────────────
+
     LaunchedEffect(authState) {
         if (authState is AuthState.Success) {
             val route = (authState as AuthState.Success).route
@@ -109,6 +111,18 @@ fun RegisterScreen(
                 leadingIcon = { Icon(Icons.Default.Person, contentDescription = null) }
             )
             Spacer(modifier = Modifier.height(20.dp))
+            FieldBlock(
+                label = "Phone Number",
+                value = phoneNumber,
+                onValueChange = { phoneNumber = it },
+                placeholder = "07XXXXXXXX",
+                leadingIcon = { Icon(Icons.Default.Call, contentDescription = null) }
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+
+
 
             FieldBlock(
                 label = "Email Address",
@@ -154,7 +168,7 @@ fun RegisterScreen(
             val isLoading = authState is AuthState.Loading
 
             Button(
-                onClick = { viewModel.signup(fullName.trim(), email.trim(), password, confirmPass) },
+                onClick = { viewModel.signup(fullName.trim(), email.trim(), phoneNumber.trim(), password, confirmPass) },
                 modifier = Modifier.fillMaxWidth().height(56.dp),
                 shape = RoundedCornerShape(16.dp),
                 colors = ButtonDefaults.buttonColors(
@@ -213,7 +227,7 @@ fun RegisterScreen(
     }
 }
 
-// ── Shared reusable field component ──────────────────────────────────────────
+
 @Composable
 fun FieldBlock(
     label: String,

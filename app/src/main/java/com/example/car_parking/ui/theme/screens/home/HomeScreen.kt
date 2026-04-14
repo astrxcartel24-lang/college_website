@@ -36,8 +36,6 @@ fun HomeScreen(
 
     val authState by viewModel.authState.collectAsStateWithLifecycle()
 
-    // ── Only navigate away on logout (Success → ROUTE_LOGIN) ─────────────────
-    // Login Success (ROUTE_HOME) is what brought us here — ignore it
     LaunchedEffect(authState) {
         val state = authState
         if (state is AuthState.Success && state.route != "home") {
@@ -62,23 +60,23 @@ fun HomeScreen(
                     )
                 },
                 actions = {
-                    IconButton(onClick = { viewModel.logout() }) {  // ← actually calls signOut()
-                        Icon(Icons.Default.ExitToApp,
-                            contentDescription = "Logout", tint = Color.White)
+                    Button(onClick = { viewModel.logout() }) {
+                        Icon(
+                            imageVector = Icons.Default.ExitToApp,
+                            contentDescription = "Logout"
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(text = "Logout")
                     }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF0F0C29),
-                    titleContentColor = Color.White
-                )
+                }
             )
         },
         bottomBar = {
             NavigationBar(containerColor = Color(0xFF24243E)) {
                 listOf(
-                    Triple("Home",    Icons.Default.Home,          0),
-                    Triple("Profile", Icons.Default.AccountCircle, 1),
-                    Triple("Settings",Icons.Default.Settings,      2)
+                    Triple("Home",     Icons.Default.Home,          0),
+                    Triple("Profile",  Icons.Default.AccountCircle, 1),
+                    Triple("Settings", Icons.Default.Settings,      2)
                 ).forEach { (label, icon, index) ->
                     NavigationBarItem(
                         selected = selectedItem == index,
@@ -95,11 +93,13 @@ fun HomeScreen(
                 .padding(padding)
                 .padding(16.dp)
         ) {
-            Text("Smart Parking System", fontSize = 26.sp,
+            Text(
+                "Smart Parking System",
+                fontSize = 26.sp,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 20.dp))
+                modifier = Modifier.padding(bottom = 20.dp)
+            )
 
-            // ── Status card ───────────────────────────────────────────────────
             Card(
                 modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
                 shape = RoundedCornerShape(20.dp),
@@ -109,7 +109,6 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth().padding(20.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    // TODO: drive these from a ParkingViewModel reading Firebase
                     Column {
                         Text("Available", color = Color.White)
                         Text("18 Slots", fontSize = 20.sp, color = Color.White)
@@ -121,7 +120,6 @@ fun HomeScreen(
                 }
             }
 
-            // ── Action cards ──────────────────────────────────────────────────
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -133,7 +131,7 @@ fun HomeScreen(
                         listOf(Color(0xFF7F5AF0), Color(0xFF5A3ED9))),
                     icon     = { Icon(Icons.Default.Add, "Add Car",
                         tint = Color.White, modifier = Modifier.size(28.dp)) },
-                    onClick  = { /* TODO: navigate to add car screen */ },
+                    onClick  = { navController.navigate("add_car") },  // ✅ fixed
                     modifier = Modifier.weight(1f)
                 )
                 ActionCard(
