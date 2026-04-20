@@ -1,8 +1,10 @@
 package com.example.car_parking.models
 
 data class UserModel(
-    val username: String = "",
+    val fullName: String = "",
     val email: String = "",
+    val phone: String? = null,
+    val avatarUrl: String? = null,
     val userId: String = "",
-    val phoneNumber: String = ""
+    val memberSince: String? = null
 )

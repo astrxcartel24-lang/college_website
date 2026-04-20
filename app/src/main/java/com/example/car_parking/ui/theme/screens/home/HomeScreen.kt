@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -25,6 +26,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.car_parking.data.AuthViewModel
 import com.example.car_parking.data.AuthViewModel.AuthState
+import com.example.car_parking.navigation.ROUTE_ADD_CAR
+import com.example.car_parking.navigation.ROUTE_CAR_LIST
+import com.example.car_parking.navigation.ROUTE_SETTINGS
+import com.example.car_parking.navigation.ROUTE_PROFILE
+import com.example.car_parking.navigation.ROUTE_HOME
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -32,7 +38,7 @@ fun HomeScreen(
     navController: NavHostController,
     viewModel: AuthViewModel = viewModel()
 ) {
-    var selectedItem by rememberSaveable { mutableStateOf(0) }
+    var selectedItem by rememberSaveable { mutableIntStateOf(0) }
 
     val authState by viewModel.authState.collectAsStateWithLifecycle()
 
@@ -62,7 +68,7 @@ fun HomeScreen(
                 actions = {
                     Button(onClick = { viewModel.logout() }) {
                         Icon(
-                            imageVector = Icons.Default.ExitToApp,
+                            imageVector = Icons.AutoMirrored.Filled.ExitToApp,
                             contentDescription = "Logout"
                         )
                         Spacer(modifier = Modifier.width(8.dp))
@@ -80,7 +86,14 @@ fun HomeScreen(
                 ).forEach { (label, icon, index) ->
                     NavigationBarItem(
                         selected = selectedItem == index,
-                        onClick  = { selectedItem = index },
+                        onClick  = { 
+                            selectedItem = index
+                            when (index) {
+                                0 -> navController.navigate(ROUTE_HOME)
+                                1 -> navController.navigate(ROUTE_PROFILE)
+                                2 -> navController.navigate(ROUTE_SETTINGS)
+                            }
+                        },
                         icon     = { Icon(icon, contentDescription = label) },
                         label    = { Text(label, color = Color.Cyan) }
                     )
@@ -131,7 +144,7 @@ fun HomeScreen(
                         listOf(Color(0xFF7F5AF0), Color(0xFF5A3ED9))),
                     icon     = { Icon(Icons.Default.Add, "Add Car",
                         tint = Color.White, modifier = Modifier.size(28.dp)) },
-                    onClick  = { navController.navigate("add_car") },  // ✅ fixed
+                    onClick  = { navController.navigate(ROUTE_ADD_CAR) },
                     modifier = Modifier.weight(1f)
                 )
                 ActionCard(
@@ -141,7 +154,7 @@ fun HomeScreen(
                         listOf(Color(0xFF2CB67D), Color(0xFF1A8A5A))),
                     icon     = { Icon(Icons.AutoMirrored.Filled.List, "View Cars",
                         tint = Color.White, modifier = Modifier.size(28.dp)) },
-                    onClick  = { /* TODO: navigate to car list screen */ },
+                    onClick  = { navController.navigate(ROUTE_CAR_LIST) },
                     modifier = Modifier.weight(1f)
                 )
             }

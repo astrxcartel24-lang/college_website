@@ -15,5 +15,6 @@ data class CarModel(
     val phoneNumber: String = "",
     val isParked: Boolean = false,
     val slotId: String = "",
+    val entryDateTime: Long = 0L,
     val createdAt: Long = 0L
 )

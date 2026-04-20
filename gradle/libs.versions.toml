@@ -11,6 +11,9 @@ composeBom = "2024.09.00"
 animationCoreLint = "1.10.6"
 runtime = "1.10.6"
 firebaseCrashlyticsBuildtools = "3.0.6"
+datastore = "1.1.1"
+preference = "1.2.1"
+fragment = "1.8.5"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,6 +37,10 @@ androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime
 firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "firebase-crashlytics-buildtools", version.ref = "firebaseCrashlyticsBuildtools" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" }
 firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx" }
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+androidx-preference-ktx = { group = "androidx.preference", name = "preference-ktx", version.ref = "preference" }
+androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
+androidx-ui-viewbinding = { group = "androidx.compose.ui", name = "ui-viewbinding" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

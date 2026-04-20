@@ -38,6 +38,7 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
 }
 
@@ -67,6 +68,15 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation("com.google.firebase:firebase-storage-ktx")
     implementation(libs.firebase.firestore.ktx)
+
+    // ── DataStore & Preferences ────────────────────────────────────────────
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.preference.ktx)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.ui.viewbinding)
+
+    // ── Splash Screen ──────────────────────────────────────────────────────
+    implementation("androidx.core:core-splashscreen:1.2.0")
 
     // ── Testing ────────────────────────────────────────────────────────────
     testImplementation(libs.junit)

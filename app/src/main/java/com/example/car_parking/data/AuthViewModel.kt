@@ -55,10 +55,10 @@ class AuthViewModel : ViewModel() {
                 val result = auth.createUserWithEmailAndPassword(email, password).await()
                 val userId = result.user?.uid ?: throw Exception("User ID not found")
                 val user = UserModel(
-                    username    = username,
+                    fullName    = username,
                     email       = email,
                     userId      = userId,
-                    phoneNumber = phoneNumber
+                    phone       = phoneNumber
                 )
                 dbRef.child(userId).setValue(user).await()
                 _authState.value = AuthState.Success(ROUTE_LOGIN)

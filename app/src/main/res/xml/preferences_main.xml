@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="User Profile">
+        <EditTextPreference
+            app:key="user_name"
+            app:title="Full Name"
+            app:summary="Enter your name"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            app:key="license_plate"
+            app:title="Primary License Plate"
+            app:summary="Enter your car plate number"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            app:key="vehicle_model"
+            app:title="Vehicle Model"
+            app:summary="e.g. Toyota Camry"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Parking Preferences">
+        <ListPreference
+            app:key="default_duration"
+            app:title="Default Duration"
+            app:defaultValue="60"
+            app:entries="@array/duration_entries"
+            app:entryValues="@array/duration_values"
+            app:useSimpleSummaryProvider="true" />
+        <SwitchPreferenceCompat
+            app:key="auto_extend"
+            app:title="Auto-extend Duration"
+            app:summary="Automatically extend parking if time is running out"
+            app:defaultValue="false" />
+        <SwitchPreferenceCompat
+            app:key="show_available_only"
+            app:title="Show Available Only"
+            app:summary="Only show parking spots that are currently free"
+            app:defaultValue="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Notifications">
+        <SwitchPreferenceCompat
+            app:key="reminders_enabled"
+            app:title="Parking Reminders"
+            app:summary="Get notified before parking expires"
+            app:defaultValue="true" />
+        <SwitchPreferenceCompat
+            app:key="low_balance_alerts"
+            app:title="Low Balance Alerts"
+            app:summary="Notify when payment balance is low"
+            app:defaultValue="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Navigation">
+        <ListPreference
+            app:key="map_view_type"
+            app:title="Map View Type"
+            app:defaultValue="standard"
+            app:entries="@array/map_type_entries"
+            app:entryValues="@array/map_type_values"
+            app:useSimpleSummaryProvider="true" />
+        <ListPreference
+            app:key="navigation_app"
+            app:title="Navigation App"
+            app:defaultValue="google_maps"
+            app:entries="@array/navigation_app_entries"
+            app:entryValues="@array/navigation_app_values"
+            app:useSimpleSummaryProvider="true" />
+        <SwitchPreferenceCompat
+            app:key="avoid_tolls"
+            app:title="Avoid Tolls"
+            app:defaultValue="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Appearance">
+        <ListPreference
+            app:key="theme_mode"
+            app:title="App Theme"
+            app:defaultValue="system"
+            app:entries="@array/theme_entries"
+            app:entryValues="@array/theme_values"
+            app:useSimpleSummaryProvider="true" />
+        <SwitchPreferenceCompat
+            app:key="high_contrast"
+            app:title="High Contrast"
+            app:defaultValue="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Privacy &amp; Data">
+        <ListPreference
+            app:key="location_mode"
+            app:title="Location Mode"
+            app:defaultValue="high_accuracy"
+            app:entries="@array/location_entries"
+            app:entryValues="@array/location_values"
+            app:useSimpleSummaryProvider="true" />
+        <SwitchPreferenceCompat
+            app:key="share_anonymous_data"
+            app:title="Share Anonymous Data"
+            app:summary="Help us improve by sharing usage data"
+            app:defaultValue="true" />
+        <Preference
+            app:key="clear_cache"
+            app:title="Clear Cache"
+            app:summary="Clear temporary app data" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Accessibility">
+        <SwitchPreferenceCompat
+            app:key="voice_guidance"
+            app:title="Voice Guidance"
+            app:defaultValue="false" />
+        <SwitchPreferenceCompat
+            app:key="large_timer"
+            app:title="Large Timer Display"
+            app:defaultValue="false" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

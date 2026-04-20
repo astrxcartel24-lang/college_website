@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Base application theme. -->
+    <style name="Theme.Car_parking" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">#7F5AF0</item>
+        <item name="android:windowBackground">#16161F</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+    </style>
 
-    <style name="Theme.Car_parking" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- Splash Screen Theme -->
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Set the splash screen background, widget and duration -->
+        <item name="windowSplashScreenBackground">#16161F</item>
+
+        <!-- Use an icon from your project. For now using ic_launcher -->
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+
+        <!-- Set the theme of the Activity that directly follows your splash screen -->
+        <item name="postSplashScreenTheme">@style/Theme.Car_parking</item>
+    </style>
 </resources>
